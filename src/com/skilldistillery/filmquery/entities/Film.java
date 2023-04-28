@@ -41,7 +41,6 @@ public class Film {
 
 	public Film(int id, String title, String description, short releaseYear, int languageId, int rentalDuration,
 			double rentalRate, int length, double replacementCost, String rating, String features) {
-		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -154,10 +153,17 @@ public class Film {
 	}
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating + ", features="
-				+ features + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("*Film Title: ");
+		builder.append(title);
+		builder.append(", Release Year: ");
+		builder.append(releaseYear);
+		builder.append(", Rating: ");
+		builder.append(rating);
+		builder.append(", Description: ");
+		builder.append(description);
+		builder.append("*");
+		return builder.toString();
 	}
 	
 }
