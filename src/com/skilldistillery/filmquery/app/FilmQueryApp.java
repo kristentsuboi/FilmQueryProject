@@ -20,7 +20,6 @@ public class FilmQueryApp {
 	private void launch() {
 		Scanner input = new Scanner(System.in);
 		startUserInterface(input);
-
 		input.close();
 	}
 
@@ -59,7 +58,7 @@ public class FilmQueryApp {
 				System.out.println("Please enter the keyword you would like to search: ");
 				String keyword = input.nextLine();
 				List<Film> byKeyword = db.findFilmByKeyword(keyword);
-				if (byKeyword != null) {
+				if (byKeyword.size() > 0) {
 					for (Film film : byKeyword) {
 						System.out.println(film);
 						languageChanger(film.getLanguageId());
@@ -71,7 +70,7 @@ public class FilmQueryApp {
 						System.out.println();
 					}
 				} else {
-					System.out.println("There is no matches to your keyword");
+					System.out.println("There are no matches to your keyword.\n");
 				}
 				break;
 			case 3:

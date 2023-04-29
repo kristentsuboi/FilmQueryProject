@@ -45,10 +45,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				double repCost = filmResult.getDouble("replacement_cost");
 				String rating = filmResult.getString("rating");
 				String features = filmResult.getString("special_features");
-				film = new Film(filmId, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
+				film = new Film(id, title, desc, releaseYear, langId, rentDur, rate, length, repCost, rating,
 						features);
 			}
 			stmt.close();
+			filmResult.close();
 			conn.close();
 
 		} catch (SQLException e) {
@@ -79,17 +80,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				String ln = actorResult.getString("last_name");
 				actor = new Actor(id, fn, ln);
 				actor.setFilms(findFilmsByActorId(actorId));
-//			actor = new Actor(); // Create the object
-//			// Here is our mapping of query columns to our object fields:
-//			actor.setId(actorResult.getInt(1));
-//			actor.setFirstName(actorResult.getString(2));
-//			actor.setLastName(actorResult.getString(3));
 			}
-			// ...
 			stmt.close();
+			actorResult.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return actor;
@@ -189,9 +184,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return filmList;
-
 	}
 
 }
