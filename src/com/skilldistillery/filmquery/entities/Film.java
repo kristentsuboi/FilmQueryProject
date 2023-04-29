@@ -154,15 +154,14 @@ public class Film {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("*Film Title: ");
+		builder.append("Film Title: ");
 		builder.append(title);
-		builder.append(", Release Year: ");
+		builder.append("\nRelease Year: ");
 		builder.append(releaseYear);
-		builder.append(", Rating: ");
+		builder.append("\nRating: ");
 		builder.append(rating);
-		builder.append(", Description: ");
+		builder.append("\nDescription: ");
 		builder.append(description);
-		builder.append("*");
 		return builder.toString();
 	}
 	

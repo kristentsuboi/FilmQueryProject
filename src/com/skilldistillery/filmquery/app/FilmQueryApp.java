@@ -40,19 +40,36 @@ public class FilmQueryApp {
 				int filmId = input.nextInt();
 				input.nextLine();
 				Film result = db.findFilmById(filmId);
+				List<Actor> actorsById = db.findActorsByFilmId(filmId);
 				input.nextLine();
-				if (result != null)
-					System.out.println(result + "\n");
-				else {
+				if (result != null) {
+					System.out.println(result);
+					languageChanger(result.getLanguageId());
+					System.out.println("Actors: ");
+					for (Actor actor : actorsById) {
+						System.out.println(actor.getFirstName() + " " + actor.getLastName());
+					}
+					System.out.println();
+				} else {
 					System.out.println("No film found for the film id provided.\n");
 				}
+
 				break;
 			case 2:
 				System.out.println("Please enter the keyword you would like to search: ");
 				String keyword = input.nextLine();
 				List<Film> byKeyword = db.findFilmByKeyword(keyword);
-				if (byKeyword.size() > 0) {
-					byKeyword.forEach((film) -> System.out.println(film));
+				if (byKeyword != null) {
+					for (Film film : byKeyword) {
+						System.out.println(film);
+						languageChanger(film.getLanguageId());
+						System.out.println("Actors: ");
+						List<Actor> actors = db.findActorsByFilmId(film.getId());
+						for (Actor actor : actors) {
+							System.out.println(actor.getFirstName() + " " + actor.getLastName());
+						}
+						System.out.println();
+					}
 				} else {
 					System.out.println("There is no matches to your keyword");
 				}
@@ -64,10 +81,32 @@ public class FilmQueryApp {
 			default:
 				System.out.println("Please enter a valid selection.");
 			}
-
 		} while (isTrue);
-
 	}
 
+	public void languageChanger(int langid) {
+		switch (langid) {
+		case 1:
+			System.out.println("Film Language: English");
+			break;
+		case 2:
+			System.out.println("Film Language: Italian");
+			break;
+		case 3:
+			System.out.println("Film Language: Japanese");
+			break;
+		case 4:
+			System.out.println("Film Language: Mandarin");
+			break;
+		case 5:
+			System.out.println("Film Language: French");
+			break;
+		case 6:
+			System.out.println("Film Language: German");
+			break;
+		default:
+			break;
+		}
+	}
 
 }
